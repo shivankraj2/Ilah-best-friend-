@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday Ilah 💗</title>
+<style>
+body{margin:0;background:linear-gradient(#fff0f6,#ffd6e7);font-family:Arial,sans-serif;color:#a52e68;text-align:center;min-height:100vh;padding:25px 15px;box-sizing:border-box}
+.card{max-width:430px;margin:30px auto;background:#ffffffd9;padding:25px 20px;border-radius:25px;box-shadow:0 8px 25px #d76b9633}
+h1{font-family:Georgia,serif;font-size:36px}
+#gift{font-size:100px;cursor:pointer;border:0;background:none}
+button.action{background:#ff75a8;color:white;border:0;border-radius:25px;padding:13px 20px;font-size:16px;margin:8px;cursor:pointer}
+#letter{display:none;background:#fff7fb;padding:18px;border-radius:18px;line-height:1.8;text-align:left;margin-top:20px}
+.heart{position:fixed;bottom:-30px;animation:up 4s linear forwards;pointer-events:none}
+@keyframes up{to{transform:translateY(-110vh);opacity:0}}
+</style>
+</head>
+<body>
+<div class="card">
+<p>♡ A LITTLE SURPRISE FOR YOU ♡</p>
+<h1>Happy Birthday, Ilah! 🎂</h1>
+<p>Someone special deserves a day full of smiles and lovely surprises.</p>
+<button id="gift" onclick="openGift()">🎁</button>
+<p>Tap your gift to open it!</p>
+<button class="action" onclick="openGift()">Open my gift ✨</button>
+<button class="action" onclick="music()">♫ Play sweet music</button>
+<div id="letter">
+<h2 style="text-align:center">For you, Ilah 💗</h2>
+<p>Dear Ilah,</p>
+<p>Selamat ulang tahun! ❤️🎂 Aku senang banget bisa mengenalmu. Semoga kamu selalu bahagia, sukses meraih impianmu, dan punya banyak alasan untuk tersenyum.</p>
+<p>Aku juga berharap kita bisa semakin dekat, menciptakan lebih banyak kenangan indah, dan tetap ada dalam kehidupan satu sama lain untuk waktu yang lama. Siapa tahu, masa depan punya cerita indah untuk kita. ❤️🫶🏻</p>
+<p>Selamat menikmati hari istimewamu, Ilah. Tetaplah tersenyum dan selalu jadilah dirimu sendiri.</p>
+<p style="text-align:right">With warm wishes, ♡</p>
+</div>
+<p style="font-size:12px">Made with care, just for you ✿</p>
+</div>
+<script>
+function openGift(){
+ document.getElementById('letter').style.display='block';
+ document.getElementById('gift').textContent='💝';
+ for(let i=0;i<15;i++){
+  let h=document.createElement('span');h.className='heart';
+  h.textContent=['💗','♡','✨'][Math.floor(Math.random()*3)];
+  h.style.left=Math.random()*95+'vw';
+  h.style.fontSize=(18+Math.random()*15)+'px';
+  document.body.appendChild(h);setTimeout(()=>h.remove(),4200);
+ }
+}
+let ctx,playing=false,timer;
+function music(){
+ if(playing){clearInterval(timer);playing=false;return}
+ let AC=window.AudioContext||window.webkitAudioContext;
+ if(!AC){alert('Music is not supported in this browser.');return}
+ ctx=ctx||new AC();ctx.resume();playing=true;
+ let notes=[523,659,784,659,587,659,523,392],i=0;
+ timer=setInterval(()=>{
+  let o=ctx.createOscillator(),g=ctx.createGain();
+  o.frequency.value=notes[i++%notes.length];g.gain.value=.06;
+  o.connect(g);g.connect(ctx.destination);o.start();
+  g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.3);
+  o.stop(ctx.currentTime+.31);
+ },350);
+}
+</script>
+</body>
+  </html>
+  
